@@ -12,6 +12,19 @@ const MovieDetails = ({
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
 
+  useEffect(() => {
+    function callBack(e) {
+      if (e.code === "Escape") {
+        closeSelectedId(null);
+        console.log("Close oldu");
+      }
+    }
+    document.addEventListener("keydown", callBack);
+    return () => {
+      document.removeEventListener("keydown", callBack);
+    };
+  }, [closeSelectedId]);
+
   const {
     Title: title,
     Year: year,

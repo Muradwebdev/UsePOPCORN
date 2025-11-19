@@ -18,7 +18,6 @@ const average = (arr) =>
 export const keys = "3d941e81";
 
 export default function App() {
-  // const quaryTemp = "interstellar";
   const [query, setQuery] = useState("Interstellar");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState(() => {
@@ -36,6 +35,7 @@ export default function App() {
   const handlerSelectedMovies = (id) => {
     setSelectedId((prew) => (prew === id ? null : id));
   };
+
   //prew ele selectedId demekdi yadda saxla !!!
   const closeSelectedId = () => {
     setSelectedId(null);
