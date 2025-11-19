@@ -54,8 +54,14 @@ body {
   max-width: 42rem;
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
-  overflow: scroll;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   position: relative;
+}
+
+.box::-webkit-scrollbar {
+  display: none;
 }
 
 .loader {
@@ -100,7 +106,6 @@ body {
   transition: all 0.3s;
   color: var(--color-text);
 
-  /* background-color: var(--color-background-900); */
   background-color: var(--color-primary-light);
 }
 
@@ -138,7 +143,13 @@ body {
 .list {
   list-style: none;
   padding: 0.8rem 0;
-  overflow: scroll;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
 }
 
 .list-watched {
@@ -208,8 +219,6 @@ body {
   background-color: var(--color-red-dark);
 }
 
-/* ******* */
-
 .summary {
   padding: 2.2rem 3.2rem 1.8rem 3.2rem;
   border-radius: 0.9rem;
@@ -236,8 +245,6 @@ body {
   align-items: center;
   gap: 0.8rem;
 }
-
-/* ******* */
 
 .details {
   line-height: 1.4;
@@ -325,7 +332,6 @@ body {
   aspect-ratio: 1;
   border-radius: 50%;
   border: none;
-  /* background-color: var(--color-text); */
   background-color: #fff;
   color: var(--color-background-500);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
@@ -338,11 +344,3 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-/*
-SPACING SYSTEM (px)
-2 / 4 / 8 / 12 / 16 / 24 / 32 / 40 / 48 / 64 / 80 / 96 / 128
-
-FONT SIZE SYSTEM (px)
-10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 /52 / 62 / 74 / 86 / 98
-*/

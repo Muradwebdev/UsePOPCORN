@@ -1,6 +1,6 @@
-function Movie({ movie }) {
+function Movie({ movie, handlerId }) {
   return (
-    <li>
+    <li onClick={() => handlerId(movie.imdbID)}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
       <h3>{movie.Title}</h3>
       <div>
