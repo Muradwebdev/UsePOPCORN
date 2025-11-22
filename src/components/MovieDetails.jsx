@@ -16,7 +16,7 @@ const MovieDetails = ({
     function callBack(e) {
       if (e.code === "Escape") {
         closeSelectedId(null);
-        console.log("Close oldu");
+        // console.log("Close oldu");
       }
     }
     document.addEventListener("keydown", callBack);
