@@ -4,6 +4,8 @@ function Search({ query, setQuery }) {
   const inputElem = useRef();
 
   useEffect(() => {
+    inputElem.current.focus();
+
     const onCallBack = (e) => {
       if (e.key === "Enter") {
         inputElem.current.focus();
