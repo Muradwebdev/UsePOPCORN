@@ -10,13 +10,14 @@ function Search({ query, setQuery }) {
       if (e.key === "Enter") {
         inputElem.current.focus();
         inputElem.current.style.backgroundColor = "#ee628eff";
+        setQuery("")
       }
     };
     document.addEventListener("keydown", onCallBack);
     return () => {
       document.removeEventListener("keydown", onCallBack);
     };
-  }, []);
+  }, [setQuery]);
   return (
     <input
       ref={inputElem}
