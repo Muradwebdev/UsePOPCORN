@@ -71,12 +71,14 @@ export default function App() {
           `https://www.omdbapi.com/?apikey=${keys}&s=${query}`,
           { signal }
         );
-        if (!res.ok) throw new Error("Throw olan hissede error var!!!");
+        if (!res.ok) throw new Error(error.message);
         const data = await res.json();
         if (data.Response === "False") throw new Error("Found movie list");
         setMovies(data.Search);
       } catch (error) {
-        console.error(error.message);
+        if (error.name === "AbortError") {
+          return;
+        }
         setError(error.message);
       } finally {
         setIsLoading(false);
@@ -85,7 +87,7 @@ export default function App() {
     fetchMovies();
 
     return () => controller.abort();
-  }, [query]);
+  }, [query, error.message]);
 
   return (
     <>
