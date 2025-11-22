@@ -4,14 +4,11 @@ function Search({ query, setQuery }) {
   const inputElem = useRef();
 
   useEffect(() => {
- if (document.activeElement === inputElem.current) {
-        return;
-      }
+
     const onCallBack = (e) => {
       if (e.key === "Enter") {
         inputElem.current.focus();
         inputElem.current.style.backgroundColor = "#ee628eff";
-        setQuery("")
       }
     };
     document.addEventListener("keydown", onCallBack);
