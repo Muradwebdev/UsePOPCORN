@@ -9,6 +9,7 @@ function Search({ query, setQuery }) {
     const onCallBack = (e) => {
       if (e.key === "Enter") {
         inputElem.current.focus();
+        inputElem.current.style.backgroundColor = "#ee628eff";
         setQuery("")
       }
     };
