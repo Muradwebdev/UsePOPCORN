@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { keys } from "../App";
+import { useEffect, useRef, useState } from "react";
+import { keys } from "./useMovies";
 import StarRating from "./StarRating";
 import Loader from "./Loader";
 const MovieDetails = ({
@@ -11,7 +11,10 @@ const MovieDetails = ({
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
-
+  const counterRef = useRef(0);
+  useEffect(() => {
+    if (userRating) counterRef.current += 1;
+  }, [userRating]);
   useEffect(() => {
     function callBack(e) {
       if (e.code === "Escape") {
@@ -92,6 +95,7 @@ const MovieDetails = ({
       director,
       genre,
       userRating,
+      userCounterRating: counterRef.current,
     };
     handlerAddWatched(newMovie);
     closeSelectedId(null);

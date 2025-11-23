@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import Main from "./components/Main";
@@ -11,26 +11,16 @@ import Box from "./components/Box";
 import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMessage";
 import MovieDetails from "./components/MovieDetails";
-
+import { useMovies } from "./components/useMovies";
+import useLocalStorageState from "./components/useLocalStorageState";
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-export const keys = "3d941e81";
-
 export default function App() {
   const [query, setQuery] = useState("Interstellar");
-  const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState(() => {
-    const store = localStorage.getItem("movies");
-    return store ? JSON.parse(store) : [];
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [watched, setWatched] = useLocalStorageState("movies", []);
   const [selectedId, setSelectedId] = useState(null);
-
-  useEffect(() => {
-    localStorage.setItem("movies", JSON.stringify(watched));
-  }, [watched]);
+  const { movies, isLoading, error } = useMovies(query);
 
   const handlerSelectedMovies = (id) => {
     setSelectedId((prew) => (prew === id ? null : id));
@@ -52,42 +42,6 @@ export default function App() {
   const handleDeleteMovie = (id) => {
     setWatched(watched.filter((item) => item.imdbID !== id));
   };
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-    if (query.length < 3) {
-      setMovies([]);
-      setError("");
-      return;
-    }
-
-    async function fetchMovies() {
-      try {
-        setIsLoading(true);
-        setError("");
-
-        const res = await fetch(
-          `https://www.omdbapi.com/?apikey=${keys}&s=${query}`,
-          { signal }
-        );
-        if (!res.ok) throw new Error(error.message);
-        const data = await res.json();
-        if (data.Response === "False") throw new Error("Found movie list");
-        setMovies(data.Search);
-      } catch (error) {
-        if (error.name === "AbortError") {
-          return;
-        }
-        setError(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchMovies();
-
-    return () => controller.abort();
-  }, [query, error.message]);
 
   return (
     <>
